@@ -39,7 +39,7 @@ describe("A CSV file with only correct headers is accepted", () => {
       // I chose this file because it only has one user with multiple versions
       outFileNames = importEnrolleeCsv("./mocks/MOCK_DATA.csv", "out").sort();
     } catch (err) {
-      error = err;
+      // Do nothing
     }
 
     const expectedInsuranceCompanyFiles = Array.from(
@@ -69,7 +69,7 @@ describe("A CSV file with only correct headers is accepted", () => {
           "out"
         )[0];
       } catch (err) {
-        error = err;
+        // Do nothing
       }
 
       const rawOutData = fs.readFileSync(outFileName, "utf-8");
@@ -103,7 +103,7 @@ describe("A CSV file with a missing header is not accepted", () => {
     try {
       importEnrolleeCsv("./mocks/MOCK_DATA_MISSING_COL.csv", "out");
     } catch (err) {
-      error = err;
+      error = err.message;
     }
     assert.equal(
       error,
